@@ -73,7 +73,7 @@ As some of you may see already, this did not work. First of all, the lib in -lli
 be skipped, apparently its already implied. Second, the headers and object files that were 
 installed for libtcod did not end up in a PATH that my compiler would search, so the 
 compilation would not work unless I specified the filepath to both the libtcod header files
-and the libtcod shared objects, which happen to be in different folders, god knows why.
+and the libtcod shared objects, which happen to be in different folders.
 Anyway, according to the README.md for building libtcod using autotools, libtcod static and
 shared libraries are placed in /usr/local/lib and the header files are placed in 
 /usr/local/include/libtcod. With that in mind we type:
