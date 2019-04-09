@@ -63,23 +63,23 @@ Let's try getting the classic '@' character to move on the screen. First we need
 the console. Add the following to your while loop in main.c:
 
 	while (!TCOD_console_is_window_closed()) {
-
-		*TCOD_console_clear(NULL);*
-		*TCOD_console_put_char(NULL, 40, 25, '@', TCOD_BKGND_NONE);*
-
+<span style='color: green'>
+		TCOD_console_clear(NULL);
+		TCOD_console_put_char(NULL, 40, 25, '@', TCOD_BKGND_NONE);
+</span>
 		TCOD_console_flush();
 		TCOD_console_wait_for_keypress(true);
 	    }
 
 Compile it now, and when you run it you should see an '@' sign in the middle of the screen.
 
-	*TCOD_console_clear(NULL);*
+	TCOD_console_clear(NULL);
 
 This line doesn't do much right now, but it will be necessary when we start moving. Otherwise
 we would leave a trail of '@' signs behind us. What it does is clean the screen every time
 it's called.
 
-	*TCOD_console_put_char(NULL, 40, 25, '@', TCOD_BKGND_NONE);*
+	TCOD_console_put_char(NULL, 40, 25, '@', TCOD_BKGND_NONE);
 
 This is what paints our nameless hero on the screen. The NULL argument in this function and
 also in the console_clear function refers to the specific console we are either clearing
