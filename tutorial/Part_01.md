@@ -63,10 +63,10 @@ Let's try getting the classic '@' character to move on the screen. First we need
 the console. Add the following to your while loop in main.c:
 
 	while (!TCOD_console_is_window_closed()) {
-<span style='color: green'>
+	<span style='color: green'>
 		TCOD_console_clear(NULL);
 		TCOD_console_put_char(NULL, 40, 25, '@', TCOD_BKGND_NONE);
-</span>
+	</span>
 		TCOD_console_flush();
 		TCOD_console_wait_for_keypress(true);
 	    }
