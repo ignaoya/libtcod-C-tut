@@ -63,10 +63,10 @@ Let's try getting the classic '@' character to move on the screen. First we need
 the console. Add the following to your while loop in main.c:
 
 	while (!TCOD_console_is_window_closed()) {
-	<span style='color: green'>
+
 		TCOD_console_clear(NULL);
 		TCOD_console_put_char(NULL, 40, 25, '@', TCOD_BKGND_NONE);
-	</span>
+
 		TCOD_console_flush();
 		TCOD_console_wait_for_keypress(true);
 	    }
@@ -90,3 +90,153 @@ flag which says we don't want to change the background color of the cell we're d
 This function uses the default foreground color of the console, which is white. If we 
 want to change the color of the '@' sign we need to use another function. We'll get to 
 that when we add monsters. Let's get the bastard moving.
+
+First, add the stdlib.h at the top of your main.c file before your libtcode include, like this:
+
+	#include <stdlib.h>
+	#include "libtcod.h"
+
+We're gonna need that library to start establishing the structure of our game.
+Immediately after the include statements, add the following code:
+
+
+	typedef struct Entity {
+		int x;
+		int y;
+		int c;
+	} Entity;
+
+This will be the basic entity from which we make every single creature. Right now an entity
+simply has an x and y int for its position, and a c int that will contain the character
+that represents it on the screen.
+
+After that, add these function declarations:
+
+	void handle_input(Entity * entity, TCOD_key_t key);
+	void move(Entity * entity, int direction);
+
+Handle_input is the function we're gonna use to process the user's keypresses. Move is the
+function we're going to use to move not only the the player character but also other creatures.
+After the ending bracket of the main() function, add the define the functions like this:
+
+	void handle_input(Entity * entity, TCOD_key_t key) {
+		switch(key.c) {
+			case 'k': move(entity, 'u'); break;
+			case 'j': move(entity, 'd'); break;
+			case 'h': move(entity, 'l'); break;
+			case 'l': move(entity, 'r'); break;
+			default: break;
+		}
+	}
+
+	void move(Entity * entity, int direction) {
+		switch(direction) {
+			case 'u': entity->y--; break;
+			case 'd': entity->y++; break;
+			case 'l': entity->x--; break;
+			case 'r': entity->x++; break;
+			default: break;
+		}
+	}
+
+You might think that this is overly repetitive. You might be right. It does seem kind of redundant,
+but when I started I had both functions simplified into one move function that took the key and
+modified the player's x or y position, and that function only worked for the player. So this is
+how I refactored it so that I could have a universal move function and a specific handle_input
+function for the player. I'm using the vim keys k j h l, but if you prefer w a s d, go with that.
+In order to use the standard arrow keys, you just need to change the switch in handle_input
+to the following:
+
+	switch(key.vk) {
+		   case TCODK_UP : move(entity, 'u'); break;
+		   case TCODK_DOWN : move(entity, 'd'); break;
+		   case TCODK_LEFT : move(entity, 'l'); break;
+		   case TCODK_RIGHT : move(entity, 'r'); break;
+		   default:break;
+
+And now to set up the player, add the following code in the main() function, between the root
+console initialization and the start of the while loop:
+
+	TCOD_console_init_root(80, 50, "These Cunning Old Depths", false, TCOD_RENDERER_SDL);
+
+	Entity * player;
+	player = malloc(sizeof(Entity));
+	player->x = 40;
+	player->y = 25;
+	player->c = '@';
+
+	while (!TCOD_console_is_window_closed()) {
+
+The first line generates a player variable that is a pointer to an Entity.
+The second line uses the malloc() function from the stdlib.h to allocate the appropriate 
+memory for the entity pointer. Then we assign an x and y value to the player and, in the
+last line, we assign the '@' character to its c variable.
+
+Finally, lets change our while loop to use this player pointer and the new functions:
+
+	while (!TCOD_console_is_window_closed()) {
+		TCOD_console_clear(NULL);
+		TCOD_console_put_char(NULL, player->x, player->y, player->c, TCOD_BKGND_NONE);
+		TCOD_console_flush();
+		TCOD_key_t key = TCOD_console_wait_for_keypress(true);
+		handle_input(player, key);
+	}
+
+As you can see, instead of using hard coded values in put_char, we use the variables inside the
+player pointer. Then we assign the return value of console_wait_for_keypress to a TCOD_key_t
+variable which we pass into the handle_input function along with the player pointer.
+Summing up, your main.c file should now look like this:
+
+	#include <stdlib.h>
+	#include "libtcod.h"
+
+	typedef struct Entity {
+		int x;
+		int y;
+		int c;
+	} Entity;
+
+	void handle_input(Entity * entity, TCOD_key_t key);
+	void move(Entity * entity, int direction);
+
+	void main() {
+		TCOD_console_init_root(80, 50, "These Cunning Old Depths", false, TCOD_RENDERER_SDL);
+
+		Entity * player;
+		player = malloc(sizeof(Entity));
+		player->x = 40;
+		player->y = 25;
+		player->c = '@';
+
+		while (!TCOD_console_is_window_closed()) {
+			TCOD_console_clear(NULL);
+			TCOD_console_put_char(NULL, player->x, player->y, player->c, TCOD_BKGND_NONE);
+			TCOD_console_flush();
+			TCOD_key_t key = TCOD_console_wait_for_keypress(true);
+			handle_input(player, key);
+		}
+	}
+
+	void handle_input(Entity * entity, TCOD_key_t key) {
+		switch(key.c) {
+			case 'k': move(entity, 'u'); break;
+			case 'j': move(entity, 'd'); break;
+			case 'h': move(entity, 'l'); break;
+			case 'l': move(entity, 'r'); break;
+			default: break;
+		}
+	}
+
+	void move(Entity * entity, int direction) {
+		switch(direction) {
+			case 'u': entity->y--; break;
+			case 'd': entity->y++; break;
+			case 'l': entity->x--; break;
+			case 'r': entity->x++; break;
+			default: break;
+		}
+	}
+
+Try compiling that using the same commands we learned in Part_00, and run the main object that is
+built by the compiler. You should now be able to move the '@' character around the screen with
+whatever movement keys you chose.

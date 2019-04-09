@@ -7,7 +7,8 @@ typedef struct Entity {
 	int c;
 } Entity;
 
-void move(Entity * entity, TCOD_key_t);
+void handle_input(Entity * entity, TCOD_key_t key);
+void move(Entity * entity, int direction);
 
 void main() {
 	TCOD_console_init_root(80, 50, "These Cunning Old Depths", false, TCOD_RENDERER_SDL);
@@ -23,16 +24,26 @@ void main() {
 		TCOD_console_put_char(NULL, player->x, player->y, player->c, TCOD_BKGND_NONE);
 		TCOD_console_flush();
 		TCOD_key_t key = TCOD_console_wait_for_keypress(true);
-		move(player, key);
+		handle_input(player, key);
 	}
 }
 
-void move(Entity * entity, TCOD_key_t key) {
+void handle_input(Entity * entity, TCOD_key_t key) {
 	switch(key.c) {
-		case 'k': entity->y--; break;
-		case 'j': entity->y++; break;
-		case 'h': entity->x--; break;
-		case 'l': entity->x++; break;
+		case 'k': move(entity, 'u'); break;
+		case 'j': move(entity, 'd'); break;
+		case 'h': move(entity, 'l'); break;
+		case 'l': move(entity, 'r'); break;
+		default: break;
+	}
+}
+
+void move(Entity * entity, int direction) {
+	switch(direction) {
+		case 'u': entity->y--; break;
+		case 'd': entity->y++; break;
+		case 'l': entity->x--; break;
+		case 'r': entity->x++; break;
 		default: break;
 	}
 }
