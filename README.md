@@ -35,12 +35,15 @@ good C style from it, as I'm in the process of
 learning it myself.
 
 
-### Resources
+### Useful Resources
+
+The following are links to the resources I'm consulting
+in order to figure out how to do this.
 
 [The libtcod documentation page](http://roguecentral.org/doryen/data/libtcod/doc/1.5.1/index2.html?c=true&cpp=true&cs=false&py=true&lua=false)
 
 [TStand90's tutorial pages](http://rogueliketutorials.com/) is a great resource, 
-though for some reason, his tdl tutorial is not
-up anymore. 
+though for some reason, his python3-tdl tutorial is not
+up at the moment. 
 
 [The libtcod c++ tutorial](http://www.roguebasin.com/index.php?title=Complete_roguelike_tutorial_using_C%2B%2B_and_libtcod_-_part_1:_setting_up)
