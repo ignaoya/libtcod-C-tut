@@ -1,5 +1,17 @@
+#include "stdlib.h"
 #include "entity.h"
 
+
+Entity *create_entity(int x, int y, int ch, TCOD_color_t color) {
+	Entity *entity;
+	entity = malloc(sizeof(Entity));
+	entity->x = 40;
+	entity->y = 25;
+	entity->ch = '@';
+	entity->color = color;
+
+	return entity;
+}
 
 void move(Entity * entity, int direction) {
 	switch(direction) {
@@ -10,3 +22,4 @@ void move(Entity * entity, int direction) {
 		default: break;
 	}
 }
+

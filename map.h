@@ -13,8 +13,8 @@ typedef struct Map {
 } Map;
 
 Map * create_map(int width, int height);
-bool isWall(Map map, int x, int y);
-void setWall(Map map, int x, int y);
-void render_map(Map map);
+bool isWall(Map *map, int x, int y);
+void setWall(Map *map, int x, int y);
+void render_map(Map *map);
 
 #endif
