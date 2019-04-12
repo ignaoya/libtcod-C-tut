@@ -9,10 +9,11 @@ Engine *create_engine() {
 	Engine *engine;
 	engine = malloc(sizeof(Engine));
 	engine->player = create_entity(40, 25, '@', TCOD_white);
-	//engine->entities = malloc(sizeof(Entity) * 1);
+	engine->entities = malloc(sizeof(Entity) * 2);
 	engine->map = create_map(80, 50);
 
-	//engine->entities[0] = engine->player;
+	engine->entities[0] = engine->player;
+	engine->entities[1] = create_entity(30, 25, 'G', TCOD_white);
 
 	return engine;
 }
@@ -44,11 +45,10 @@ void update_engine(Engine *engine) {
 void render_engine(Engine *engine) {
 	TCOD_console_clear(NULL);
 	render_map(engine->map);
-	/*for (int i = 0; i < 1; i++) {
-		Entity *entity = engine->entities[i];
-		TCOD_console_put_char(NULL, entity->x, entity->y, entity->ch, TCOD_BKGND_NONE);
+	for (int i = 0; i < 2; i++) {
+		TCOD_console_put_char(NULL, engine->entities[i]->x, engine->entities[i]->y, engine->entities[i]->ch, TCOD_BKGND_NONE);
 		}
-		*/
-	TCOD_console_put_char(NULL, engine->player->x, engine->player->y, engine->player->ch, TCOD_BKGND_NONE);
+		
+	//TCOD_console_put_char(NULL, engine->player->x, engine->player->y, engine->player->ch, TCOD_BKGND_NONE);
 }
 

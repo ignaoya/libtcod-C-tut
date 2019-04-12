@@ -33,7 +33,7 @@ void setWall(Map *map, int x, int y) {
 
 void render_map(Map *map) {
 	TCOD_color_t darkWall = {0, 0, 100};
-	TCOD_color_t darkGround = {50, 50, 150};
+	TCOD_color_t darkGround = {50, 30, 150};
 
 	for (int x=0; x < map->width; x++) {
 		for (int y=0; y < map->height; y++) {

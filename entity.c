@@ -5,9 +5,9 @@
 Entity *create_entity(int x, int y, int ch, TCOD_color_t color) {
 	Entity *entity;
 	entity = malloc(sizeof(Entity));
-	entity->x = 40;
-	entity->y = 25;
-	entity->ch = '@';
+	entity->x = x;
+	entity->y = y;
+	entity->ch = ch;
 	entity->color = color;
 
 	return entity;

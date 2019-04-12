@@ -2,7 +2,7 @@
 #define ENGINE_H
 
 typedef struct Engine {
-	//Entity **entities;
+	Entity **entities;
 	Entity *player;
 	Map *map;
 } Engine;
