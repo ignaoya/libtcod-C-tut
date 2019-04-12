@@ -2,19 +2,19 @@
 #include "libtcod.h"
 #include "map.h"	
 
-Map * create_map(int width, int height) {
+Map * create_map() {
 
 	int i, j;
 	Map * map;
 	map = malloc(sizeof(Map));
-	map->width = width;
-	map->height = height;
-	map->tiles = malloc(sizeof(Tile *) * height);
-	for (i = 0; i < width; i++)
-		map->tiles[i] = malloc(sizeof(Tile) * width);
+	map->width = 80;
+	map->height = 45;
+	map->tiles = malloc(sizeof(Tile *) * map->height);
+	for (i = 0; i < map->width; i++)
+		map->tiles[i] = malloc(sizeof(Tile) * map->width);
 
-	for (i = 0; i < height; i++)
-		for (j = 0; j < width; j++)
+	for (i = 0; i < map->height; i++)
+		for (j = 0; j < map->width; j++)
 			map->tiles[i][j].canWalk = true;
 
 	setWall(map, 30, 22);

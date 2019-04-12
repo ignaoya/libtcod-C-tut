@@ -2,7 +2,7 @@
 #define ENGINE_H
 
 typedef struct Engine {
-	TCOD_list_t entities;
+	//Entity **entities;
 	Entity *player;
 	Map *map;
 } Engine;

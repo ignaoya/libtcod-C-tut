@@ -12,7 +12,7 @@ typedef struct Map {
 	Tile **tiles;
 } Map;
 
-Map * create_map(int width, int height);
+Map * create_map();
 bool isWall(Map *map, int x, int y);
 void setWall(Map *map, int x, int y);
 void render_map(Map *map);
