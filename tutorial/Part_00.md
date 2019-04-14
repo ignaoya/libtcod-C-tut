@@ -16,7 +16,7 @@ work. From the command line type the following:
 
     sudo apt-get install curl build-essential make cmake autoconf automake libtool mercurial libasound2-dev libpulse-dev libaudio-dev libx11-dev libxext-dev libxrandr-dev libxcursor-dev libxi-dev libxinerama-dev libxxf86vm-dev libxss-dev libgl1-mesa-dev libesd0-dev libdbus-1-dev libudev-dev libgles1-mesa-dev libgles2-mesa-dev libegl1-mesa-dev
 
-Yes, that's a long list of dependencies. If you're linux is as evil as mine is, you might get
+Yes, that's a long list of dependencies. If your linux is as evil as mine is, you might get
 some errors saying such and such package couldn't be found. Just erase them from the list and
 if it recommends any replacements for them, add those. Then re enter the command, make
 sure everything is nice and tidy and move on to installing SDL2. It may have a different
@@ -32,7 +32,7 @@ will point you in the right direction.
 Now what you need to do is get the source for libtcod, which is in github.
 If you have git just type the following in the folder you want to put it.
 
-    git clone https://github.com/libtcod/libtcod
+    git clone https://github.com/libtcod/libtcod.git
 
 If you don't use git, then go to [this repository](https://github.com/libtcod/libtcod) and
 download it. Unzip it wherever you like and from that folder do the following:
@@ -86,3 +86,15 @@ type this in and the compiler still gives you an error due to not finding libtco
 if the libtcod.h file is in /usr/local/include/libtcod and if there are a bunch of libtcod.a
 libtcod.o and libtcod.so files in /usr/local/lib. If not, recheck the whole installation process 
 and may god have mercy on your soul, because the C compiler will not.
+
+Trying out this whole process again on a new linux installation I bumped into a new problem.
+When I tried to run the main object file after compiling, I got the following error message:
+
+	./main: error while loading shared libraries: libtcod.so.1: cannot open shared object file: No such file or directory
+
+After several google searches, I managed to find a fix, just enter the following command in
+your command line:
+
+	sudo ldconfig
+
+I hope that works for you too if you happen to get that error.
