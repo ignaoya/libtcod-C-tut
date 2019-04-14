@@ -11,6 +11,7 @@ Engine *create_engine() {
 	engine->player = create_entity(40, 25, '@', TCOD_white);
 	engine->entities = malloc(sizeof(Entity) * 2);
 	engine->map = create_map(80, 50);
+	engine->quit = false;
 
 	engine->entities[0] = engine->player;
 	engine->entities[1] = create_entity(30, 25, 'G', TCOD_white);
@@ -38,6 +39,9 @@ void update_engine(Engine *engine) {
 			if (!isWall(engine->map, engine->player->x+1, engine->player->y))
 				move(engine->player, 'r'); 
 			break;
+		case 'q':
+			engine->quit = true;
+			break;
 		default: break;
 	}
 }
@@ -47,8 +51,7 @@ void render_engine(Engine *engine) {
 	render_map(engine->map);
 	for (int i = 0; i < 2; i++) {
 		TCOD_console_put_char(NULL, engine->entities[i]->x, engine->entities[i]->y, engine->entities[i]->ch, TCOD_BKGND_NONE);
-		}
+	}
 		
-	//TCOD_console_put_char(NULL, engine->player->x, engine->player->y, engine->player->ch, TCOD_BKGND_NONE);
 }
 

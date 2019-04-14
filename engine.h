@@ -5,6 +5,7 @@ typedef struct Engine {
 	Entity **entities;
 	Entity *player;
 	Map *map;
+	bool quit;
 } Engine;
 
 Engine *create_engine();
