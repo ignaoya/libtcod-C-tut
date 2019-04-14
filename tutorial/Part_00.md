@@ -86,3 +86,15 @@ type this in and the compiler still gives you an error due to not finding libtco
 if the libtcod.h file is in /usr/local/include/libtcod and if there are a bunch of libtcod.a
 libtcod.o and libtcod.so files in /usr/local/lib. If not, recheck the whole installation process 
 and may god have mercy on your soul, because the C compiler will not.
+
+Trying out this whole process again on a new linux installation I bumped into a new problem.
+When I tried to run the main object file after compiling, I got the following error message:
+
+	./main: error while loading shared libraries: libtcod.so.1: cannot open shared object file: No such file or directory
+
+After several google searches, I managed to find a fix, just enter the following command in
+your command line:
+
+	sudo ldconfig
+
+I hope that works for you too if you happen to get that error.
