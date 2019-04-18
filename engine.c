@@ -55,3 +55,11 @@ void render_engine(Engine *engine) {
 		
 }
 
+void destroy_engine(Engine *engine) {
+	destroy_map(engine->map);
+	for (int i = 0; i < 2; i++)
+		destroy_entity(engine->entities[i]);
+	free(engine->entities);
+	free(engine);
+}
+

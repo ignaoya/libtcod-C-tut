@@ -12,5 +12,6 @@ typedef struct Entity {
 
 void move(Entity * entity, int direction);
 Entity *create_entity(int x, int y, int ch, TCOD_color_t color);
+void destroy_entity(Entity *entity);
 
 #endif

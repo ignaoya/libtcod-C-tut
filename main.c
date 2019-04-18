@@ -15,6 +15,9 @@ void main() {
 		TCOD_console_flush();
 		update_engine(engine);
 	}
+
+	destroy_engine(engine);
+	//free(engine);
 }
 
 

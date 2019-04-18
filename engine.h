@@ -11,5 +11,6 @@ typedef struct Engine {
 Engine *create_engine();
 void update_engine(Engine *engine);
 void render_engine(Engine *engine);
+void destroy_engine(Engine *engine);
 
 #endif

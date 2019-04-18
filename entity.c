@@ -23,3 +23,6 @@ void move(Entity * entity, int direction) {
 	}
 }
 
+void destroy_entity(Entity *entity) {
+	free(entity);
+}

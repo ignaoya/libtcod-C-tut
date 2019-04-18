@@ -9,18 +9,25 @@ Map * create_map() {
 	map = malloc(sizeof(Map));
 	map->width = 80;
 	map->height = 45;
-	map->tiles = malloc(sizeof(Tile *) * map->height);
+	map->tiles = malloc(map->height * sizeof(Tile **) * (map->width * sizeof(Tile *)));
 	for (i = 0; i < map->width; i++)
-		map->tiles[i] = malloc(sizeof(Tile) * map->width);
+		map->tiles[i] = malloc(map->width * sizeof(Tile *));
 
 	for (i = 0; i < map->height; i++)
 		for (j = 0; j < map->width; j++)
-			map->tiles[i][j].canWalk = true;
+			map->tiles[i][j] = create_tile();
 
 	setWall(map, 30, 22);
 	setWall(map, 50, 22);
 
 	return map;
+}
+
+Tile create_tile() {
+	Tile tile;
+	tile.canWalk = true;
+
+	return tile;
 }
 
 bool isWall(Map *map, int x, int y) {
@@ -42,3 +49,10 @@ void render_map(Map *map) {
 	}
 }
 
+void destroy_map(Map *map) {
+	for (int i = 0; i < map->width; i++)
+		free(map->tiles[i]);
+	free(map->tiles);
+	free(map);
+}
+ 
