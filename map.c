@@ -9,9 +9,9 @@ Map * create_map() {
 	map = malloc(sizeof(Map));
 	map->width = 80;
 	map->height = 45;
-	map->tiles = malloc(map->height * sizeof(Tile **) * (map->width * sizeof(Tile *)));
+	map->tiles = malloc(map->height * sizeof(Tile *) * (map->width * sizeof(Tile )));
 	for (i = 0; i < map->width; i++)
-		map->tiles[i] = malloc(map->width * sizeof(Tile *));
+		map->tiles[i] = malloc(map->width * sizeof(Tile));
 
 	for (i = 0; i < map->height; i++)
 		for (j = 0; j < map->width; j++)

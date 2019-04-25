@@ -12,7 +12,6 @@ Engine *create_engine() {
 	engine->entities = malloc(sizeof(Entity) * 2);
 	engine->map = create_map(80, 50);
 	engine->quit = false;
-
 	engine->entities[0] = engine->player;
 	engine->entities[1] = create_entity(30, 25, 'G', TCOD_white);
 
