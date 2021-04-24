@@ -8,32 +8,6 @@ the c++ tutorial, and I'm trying to do a similar port
 of that tutorial for C, although I'll probably change
 a few things along the way just for fun.  
 
-However, I am neither a proficient C programmer,
-nor acquainted with libtcod at the moment, so this
-tutorial will probably take a while as I am learning
-to do this myself. I have used the more pythonic port 
-of the libtcod library, tdl, and since I liked that
-so much and I'm learning C at the moment, I thought
-that it would be great to make a roguelike in C and
-propel my learning forward through the sheer joy of
-making a game. 
-
-If you take a look at what I have and you see something's
-wrong, please let me know.
-
-
-### Disclaimer and Warning
-
-In case it isn't clear yet, this project is not only 
-a work in progress, but a work in learning as well, 
-as in, I still don't know what the hell I'm doing when 
-I program in C. Although I might break the code from
-time to time, I'm not going to add anything to the
-tutorial pages until I've gotten it compiled and
-running. That said, you should not expect to learn
-good C style from it, as I'm in the process of 
-learning it myself.
-
 
 ### Useful Resources
 
